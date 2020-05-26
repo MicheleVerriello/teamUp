@@ -7,3 +7,7 @@ Dipendenze:
 	PostgresSQL Driver
 	Spring Web
 	Spring Web Service
+
+Database
+	username:postgres
+	password:Michele99
