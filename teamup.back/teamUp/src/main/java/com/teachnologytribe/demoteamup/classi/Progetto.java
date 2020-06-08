@@ -40,7 +40,4 @@ public class Progetto {
 	public void setFkIdCategoria(Long fkIdCategoria) {
 		this.fkIdCategoria = fkIdCategoria;
 	}	
-	public void nuovoProgetto(Progetto progetto) {
-		//@Query("INSERT INTO Progetto VALUES (progetto.id, progetto.nomeProgetto, progetto.descrizione, progetto.fkidcategoria)")
-	}
 }

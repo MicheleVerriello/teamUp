@@ -1,7 +1,5 @@
 package com.teachnologytribe.demoteamup.classi;
 
-import java.time.LocalDate;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +16,6 @@ public class Utente {
 	private String username;
 	private String email;
 	private String password;
-	private LocalDate dataNascita;
 	
 	
 	public Long getId() {
@@ -56,11 +53,5 @@ public class Utente {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public LocalDate getDataNascita() {
-		return dataNascita;
-	}
-	public void setDataNascita(LocalDate dataNascita) {
-		this.dataNascita = dataNascita;
 	}
 }
