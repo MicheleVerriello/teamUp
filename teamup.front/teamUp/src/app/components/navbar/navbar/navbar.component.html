@@ -19,19 +19,11 @@
                 <a class="nav-link" href="#">Ricerca Avanzata</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0 nav-search" *ngIf="isLoggedIn === 'true'">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        <form class="form-inline my-2 my-lg-0" *ngIf="isLoggedIn === 'false'">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit" disabled>Search</button>
-        </form>
         <li class="nav-item dropdown no-dot" *ngIf="isLoggedIn === 'true'">
             <a class="dropdown-toggle btn-outline-light nav-profile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <!--{{utente.nome}} {{utente.cognome}}--> Michele Verriello
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu" style="margin-right: 2px;" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#">Modifica Profilo</a>
                 <a class="dropdown-item" href="#">Logout</a>
             </div>
