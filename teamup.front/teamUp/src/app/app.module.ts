@@ -6,12 +6,16 @@ import { AppComponent } from './app.component';
 import { UtenteserviceService } from './servizi/utenteservice.service';
 import { ProgettoserviceService } from './servizi/progettoservice.service';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './components/login/login.component';
+import { RegistazioneComponent } from './components/registazione/registazione.component';
+import { NavbarComponent } from './components/navbar/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    RegistazioneComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     HttpClientModule,

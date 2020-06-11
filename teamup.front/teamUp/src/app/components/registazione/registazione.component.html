@@ -1,0 +1,123 @@
+
+<div class="container login-container">
+  <div class="row">
+      <div class="col-md-6 login-form-1">
+        <h3>Login</h3>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Inserisci la tua email *"/>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Inserisci la tua password *"/>
+        </div>
+        <div class="form-group">
+            <button class="btnSubmit">Login</button>
+        </div>
+      </div>
+
+      <div class="col-md-6 login-form-2">
+        <h3>Registratizione</h3>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Inserisci il tuo nome *" [(ngModel)]="utente.nome"/>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Inserisci il tuo cognome *" [(ngModel)]="utente.cognome"/>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Inserisci il tuo username *" [(ngModel)]="utente.username"/>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" placeholder="Inserisci la tua email *" [(ngModel)]="utente.email"/>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Inserisci la tua password *" [(ngModel)]="utente.password"/>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Conferma la tua password *" [(ngModel)]="confermaPassword"/>
+        </div>
+        <div class="form-group">
+          <button *ngIf="(utente.nome && utente.cognome && utente.password && confermaPassword && utente.email && utente.username) && (utente.password === confermaPassword)" class="btnSubmit" (click)="registrazione()">Registrati</button>
+          <button *ngIf="!((utente.nome && utente.cognome && utente.password && confermaPassword && utente.email && utente.username) && (utente.password === confermaPassword))" class="btnSubmit" disabled>Registrati</button>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+
+<!--<form class="registration-form">
+    <div class="form-row form-row-pers">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Nome">
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Cognome">
+      </div>
+    </div>
+    <div class="form-row form-row-pers">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Username">
+      </div>
+      <div class="col">
+        <input type="email" class="form-control" placeholder="Email">
+      </div>
+    </div>
+    <div class="form-row form-row-pers">
+      <div class="col">
+        <input type="password" class="form-control" placeholder="Password">
+      </div>
+      <div class="col">
+        <input type="password" class="form-control" placeholder="Conferma Password">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign in</button>
+  </form>-->
+
+
+
+    <!-- <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+            <h3>Benvenuto</h3>
+            <p>Su TeamUp potrai creare nuovi progetti con il team dei tuoi sogni!</p>
+            <a>login</a><br/>
+        </div>
+        <div class="col-md-9 register-right">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <h3 class="register-heading">Registrazione</h3>
+                    <div class="row register-form">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Nome *" [(ngModel)]="utente.nome" required/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Cognome *" [(ngModel)]="utente.cognome" required/>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Password *" [(ngModel)]="utente.password" required/>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control"  placeholder="Conferma Password *" [(ngModel)]="confermaPassword" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email *" [(ngModel)]="utente.email"  required/>
+                                <p *ngIf="emailGiaEsistente()">Email già esistente</p>
+                            </div>
+                            <div class="form-group">
+                                <input type="text"   class="form-control" placeholder="Username *" [(ngModel)]="utente.username" required/>
+                            </div>
+                            <div class="form-group">
+                                <button *ngIf="(utente.nome && utente.cognome && utente.password && confermaPassword && utente.email && utente.username) && (utente.password === confermaPassword)" class="btnRegister" (click)="registrazione()">Registrati</button>
+                                <button *ngIf="!((utente.nome && utente.cognome && utente.password && confermaPassword && utente.email && utente.username) && (utente.password === confermaPassword))" class="btnRegisterDisabled">Registrati</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="!((utente.nome && utente.cognome && utente.password && confermaPassword && utente.email && utente.username) && (utente.password === confermaPassword))" style="text-align: center; margin-top: -5%; color: red;">Tutti i campi del form di registrazione sono obbligatori*</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

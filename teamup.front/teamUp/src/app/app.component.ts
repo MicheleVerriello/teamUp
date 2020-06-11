@@ -10,29 +10,7 @@ import { UtenteserviceService } from './servizi/utenteservice.service';
 export class AppComponent {
   title = 'teamUp';
 
-  utente: Utente;
-  confermaPassword: String;
-
-  constructor(private utenteService: UtenteserviceService) {
-    this.utente = new Utente();
-  }
-
-  registrazione() {
-
-    //necessari controlli sull' esistenza della mail e dello username
-
-    if(this.utente.password === this.confermaPassword) {
-      
-      let utenteResponse: Utente;
-      
-      this.utenteService.registrazione(this.utente).subscribe(res => {
-        utenteResponse = res;
-      })
-    }
-  }
-
-
-  goToLoginPage() {
-    
+  constructor() {
+    localStorage.setItem("isLoggedIn", "true");
   }
 }

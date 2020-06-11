@@ -16,4 +16,19 @@ export class UtenteserviceService {
 
     return this.http.post<Utente>(url, utente);
   }
+
+  getListaUsername() : Observable<String[]> {
+
+    let url = "http://localhost:8080/lista/username";
+
+    return this.http.get<String[]>(url);
+  }
+
+
+  getListaEmail() : Observable<String[]> {
+
+    let url = "http://localhost:8080/lista/email";
+
+    return this.http.get<String[]>(url);
+  }
 }
