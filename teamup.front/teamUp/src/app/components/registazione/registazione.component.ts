@@ -45,13 +45,6 @@ export class RegistazioneComponent implements OnInit {
   }
 
 
-  getListaEmail() {
-    this.utenteService.getListaEmail().subscribe(res => {
-      this.listaEmail = res;
-    })
-  }
-
-
   getListaUsername() {
     this.utenteService.getListaUsername().subscribe(res => {
       this.listaUsername = res;
@@ -65,11 +58,14 @@ export class RegistazioneComponent implements OnInit {
 
     console.log(this.listaEmail)
 
-    for(let email of this.listaEmail) {
-      if(email === this.utente.email) {
-        emailPresente = true;
+    this.utenteService.getListaEmail().subscribe(res => {
+
+      for(let email of res) {
+        if(email === this.utente.email) {
+          emailPresente = true;
+        }
       }
-    }
+    })
 
     return emailPresente;
   }
