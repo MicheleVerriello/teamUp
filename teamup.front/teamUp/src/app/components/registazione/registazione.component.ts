@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UtenteserviceService } from 'src/app/servizi/utenteservice.service';
 import { Utente } from 'src/app/classi/Utente';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registazione',
@@ -16,7 +15,7 @@ export class RegistazioneComponent implements OnInit {
   listaUsername: String[] = [];
   isLoggedIn: String;
 
-  constructor(private utenteService: UtenteserviceService, private router: Router) {
+  constructor(private utenteService: UtenteserviceService) {
     this.utente = new Utente();
   }
 
@@ -38,12 +37,6 @@ export class RegistazioneComponent implements OnInit {
       })
     }
   }
-
-
-  goToLoginPage() {
-    this.router.navigate(['/login']);
-  }
-
 
   getListaUsername() {
     this.utenteService.getListaUsername().subscribe(res => {

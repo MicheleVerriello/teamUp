@@ -9,13 +9,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegistazioneComponent } from './components/registazione/registazione.component';
 import { NavbarComponent } from './components/navbar/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer/footer.component';
+import { DettaglioUtenteComponent } from './components/dettaglio-utente/dettaglio-utente.component';
+import { NuovoProgettoComponent } from './components/nuovo-progetto/nuovo-progetto.component';
+import { DettaglioProgettoComponent } from './components/dettaglio-progetto/dettaglio-progetto.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistazioneComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    DettaglioUtenteComponent,
+    NuovoProgettoComponent,
+    DettaglioProgettoComponent
   ],
   imports: [
     HttpClientModule,

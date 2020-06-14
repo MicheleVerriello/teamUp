@@ -1,6 +1,6 @@
 export class Utente {
 
-    nome: String
+    id: Number
     cognome: String
     email: String
     password: String

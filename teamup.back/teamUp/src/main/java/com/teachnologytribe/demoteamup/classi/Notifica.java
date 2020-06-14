@@ -12,7 +12,7 @@ public class Notifica {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String descrizione;
-	private Long fkIdUtente;
+	private Long fkIdProgetto;
 	
 	
 	public Long getId() {
@@ -27,11 +27,11 @@ public class Notifica {
 	public void setDescrizioneNotifica(String descrizione) {
 		this.descrizione = descrizione;
 	}
-	public Long getFkIdUtente() {
-		return fkIdUtente;
+	public Long getFkIdProgetto() {
+		return fkIdProgetto;
 	}
-	public void setFkIdUtente(Long fkIdUtente) {
-		this.fkIdUtente = fkIdUtente;
+	public void setFkIdProgetto(Long fkIdProgetto) {
+		this.fkIdProgetto = fkIdProgetto;
 	}
 	
 }

@@ -1,0 +1,18 @@
+<form>
+  <div class="row">
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Nome del progetto...*">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Descrizione...*">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-4">
+      <label>Categoria</label>
+      <select class="form-control">
+        <option *ngFor="let categoria of categorie"></option>
+      </select>
+    </div>
+  </div>
+</form>
