@@ -8,27 +8,22 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UtenteserviceService {
 
+  url = "http://localhost:8080/utente";
+
   constructor(private http: HttpClient) { }
 
   registrazione(utente: Utente) : Observable<Utente> {
 
-    let url = "http://localhost:8080/registrazione";
-
-    return this.http.post<Utente>(url, utente);
+    return this.http.post<Utente>(this.url + "/registrazione", utente);
   }
 
   getListaUsername() : Observable<String[]> {
 
-    let url = "http://localhost:8080/lista/username";
-
-    return this.http.get<String[]>(url);
+    return this.http.get<String[]>(this.url + "/username");
   }
-
 
   getListaEmail() : Observable<String[]> {
 
-    let url = "http://localhost:8080/lista/email";
-
-    return this.http.get<String[]>(url);
+    return this.http.get<String[]>(this.url + "/email");
   }
 }

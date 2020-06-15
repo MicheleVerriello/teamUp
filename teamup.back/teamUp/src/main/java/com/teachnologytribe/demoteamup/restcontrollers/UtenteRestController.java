@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.teachnologytribe.demoteamup.classi.Utente;
@@ -18,6 +19,7 @@ import com.teachnologytribe.demoteamup.repositories.interfaces.IUtenteRepository
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/utente")
 public class UtenteRestController {
 
 	@Autowired
@@ -99,5 +101,21 @@ public class UtenteRestController {
 	public Utente getUtenteById(@PathVariable("id") Long id) {
 		
 		return utenteRepository.getOne(id);
+	}
+	
+	
+	@Transactional
+	@PostMapping("/modifica")
+	public Utente modificaUtente(@RequestBody Utente utente) {
+		
+		try {
+			utenteRepository.saveAndFlush(utente);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			utente.setId((long) 0); 
+		}
+		
+		return utente;
 	}
 }
