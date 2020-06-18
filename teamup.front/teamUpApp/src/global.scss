@@ -24,3 +24,24 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.header {
+
+    --background: rgb(22, 22, 24);
+
+    .toolbar{
+
+        --background: rgb(22, 22, 24);
+
+        .title {
+
+            color: white;
+        }
+    }
+}
+
+
+.content {
+
+    --background: rgb(22, 22, 24);
+}

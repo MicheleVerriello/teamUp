@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-tabs',
@@ -7,6 +8,13 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  id: number;
 
+  constructor() {
+    this.id = AppComponent.idUtenteLoggato;
+  }
+
+  ngOnInit() {
+    this.id = AppComponent.idUtenteLoggato;
+  }
 }

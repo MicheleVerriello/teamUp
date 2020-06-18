@@ -1,9 +1,33 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
+<ion-header class="header">
+  <ion-toolbar class="toolbar">
+    <ion-title class="title">Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="content">
 
+  <ion-list class="input-list">
+
+    <ion-card>
+      <ion-item class="input-item" lines="none">
+        <ion-input class="input" type="email" placeholder="Inserisci email" clearInput="true" [(ngModel)]="email"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item class="input-item" lines="none">
+        <ion-input class="input" type="password" placeholder="Inserisci password" clearInput="true" [(ngModel)]="password"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card *ngIf="errorLogin">
+      <ion-item class="input-item-error" lines="none">
+        <ion-input class="login-error" value="Email o password errati, riprovare." readonly></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-button expand="block" (click)="login()">Login</ion-button>
+    <p style="color: white;">oppure</p>
+    <ion-button expand="block" (click)="goToRegistrationPage()">Registrati</ion-button>
+  </ion-list>
 </ion-content>

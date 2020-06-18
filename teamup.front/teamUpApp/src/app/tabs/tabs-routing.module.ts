@@ -4,7 +4,7 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
@@ -24,7 +24,7 @@ const routes: Routes = [
         loadChildren: () => import('../nuovo-progetto/nuovo-progetto.module').then(m => m.NuovoProgettoPageModule)
       },
       {
-        path: 'tab5',
+        path: 'tab5/:id',
         loadChildren: () => import('../tab-profile/tab-profile.module').then(m => m.TabProfilePageModule)
       },
       {

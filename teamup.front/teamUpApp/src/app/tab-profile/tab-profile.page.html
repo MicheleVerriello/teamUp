@@ -1,9 +1,127 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Profilo utente</ion-title>
+<ion-header class="header">
+  <ion-toolbar class="toolbar">
+    <ion-title class="title">Profilo utente</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="content">
+
+      
+
+  <ion-list *ngIf="!cambiaPasswordView">
+    <ion-card class="card" *ngIf="!isEdit">
+      <ion-item lines="none">
+        <ion-label><b>Nome:</b></ion-label>
+        <ion-input class="field" readonly value="{{utente.nome}}"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item *ngIf="isEdit">
+        <ion-label><b>Nome:</b></ion-label>
+        <ion-input class="field" value="{{utente.nome}}"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card class="card" *ngIf="!isEdit">
+      <ion-item  lines="none">
+        <ion-label><b>Cognome:</b></ion-label>
+        <ion-input class="field" readonly value="{{utente.cognome}}"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card *ngIf="isEdit">
+      <ion-item>
+        <ion-label><b>Cognome:</b></ion-label>
+        <ion-input class="field" value="{{utente.cognome}}"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card *ngIf="!isEdit" class="card">
+      <ion-item lines="none">
+        <ion-label><b>Email:</b></ion-label>
+        <ion-input class="field" readonly value="{{utente.email}}"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card class="card" *ngIf="!isEdit">
+      <ion-item lines="none">
+        <ion-label><b>Username:</b></ion-label>
+        <ion-input class="field" readonly value="{{this.utente.username}}"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card *ngIf="isEdit">
+      <ion-item>
+        <ion-label><b>Username:</b></ion-label>
+        <ion-input class="field" value="{{this.utente.username}}"></ion-input>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+
+  <ion-list *ngIf="cambiaPasswordView">
+
+    <ion-card>
+      <ion-item>
+        <ion-label><b>Vecchia passowrd:</b></ion-label>
+        <ion-input class="field" placeholder="Vecchia password"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label><b>Nuova passowrd:</b></ion-label>
+        <ion-input class="field" placeholder="Nuova password"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label><b>Conferma password:</b></ion-label>
+        <ion-input class="field" placeholder="Conferma password"></ion-input>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+
+  <ion-card class="card" *ngIf="!isEdit && !cambiaPasswordView">
+    <ion-button expand="block" (click)="openEdit()">
+      Modifica
+      <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+    </ion-button>
+  </ion-card>
+  <ion-card class="card" *ngIf="!isEdit  && !cambiaPasswordView">
+    <ion-button expand="block" (click)="openEditPassword()">
+      Cambia password
+      <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+    </ion-button>
+  </ion-card>
+
+  <ion-card class="card" *ngIf="isEdit">
+    <section>
+      <ion-button (click)="modifica()" color="success">
+        Salva
+        <ion-icon slot="end" name="pencil"></ion-icon>
+      </ion-button>
+      &nbsp;
+      <ion-button (click)="closeEdit()" color="danger">
+        Annulla
+        <ion-icon slot="end" name="close-outline"></ion-icon>
+      </ion-button>
+    </section>
+  </ion-card>
+
+  <ion-card class="card" *ngIf="cambiaPasswordView">
+    <section>
+      <ion-button (click)="cambiaPassword()" color="success">
+        Salva
+        <ion-icon slot="end" name="pencil"></ion-icon>
+      </ion-button>
+      &nbsp;
+      <ion-button (click)="closeEditPassword()" color="danger">
+        Annulla
+        <ion-icon slot="end" name="close-outline"></ion-icon>
+      </ion-button>
+    </section>
+  </ion-card>
 
 </ion-content>

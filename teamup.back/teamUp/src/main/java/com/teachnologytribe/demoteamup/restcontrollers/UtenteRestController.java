@@ -2,6 +2,7 @@ package com.teachnologytribe.demoteamup.restcontrollers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -18,7 +19,7 @@ import com.teachnologytribe.demoteamup.classi.Utente;
 import com.teachnologytribe.demoteamup.repositories.interfaces.IUtenteRepository;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:8100")
 @RequestMapping("/utente")
 public class UtenteRestController {
 
@@ -30,7 +31,22 @@ public class UtenteRestController {
 	public Utente registrazione(@RequestBody Utente utente) {
 		
 		try {
-			utenteRepository.save(utente);
+			
+			List<Utente> usernames = utenteRepository.findByUsername(utente.getUsername());
+			List<Utente> emails = utenteRepository.findByEmail(utente.getEmail());
+			
+			if(usernames.size() > 0 && emails.size() > 0) {
+				utente.setId((long) -1);
+			}
+			else if(usernames.size() > 0) {
+				utente.setId((long) -2);
+			}
+			else if(emails.size() > 0) {
+				utente.setId((long) -3);
+			}
+			else {
+				utenteRepository.save(utente);
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -42,20 +58,20 @@ public class UtenteRestController {
 	
 	
 	@Transactional
-	@GetMapping("/login")
-	public Utente login(@RequestBody Utente utente) {
+	@GetMapping("/login/{email}/{password}")
+	public Utente login(@PathVariable("email") String email, @PathVariable("password") String password) {
 		
-		Utente resUtente = new Utente();
+		Utente utente = new Utente();
 		
 		try {
-			resUtente = utenteRepository.getUtenteByUsernameAndPassword(utente.getUsername(), utente.getPassword());
+			utente = utenteRepository.findByEmailIgnoreCaseAndPasswordIgnoreCase(email, password);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			resUtente.setId((long) 0); 
+			utente.setId((long) 0); 
 		}
 		
-		return resUtente;
+		return utente;
 	}
 	
 	
@@ -98,9 +114,9 @@ public class UtenteRestController {
 	
 	@Transactional
 	@GetMapping("/utente/{id}")
-	public Utente getUtenteById(@PathVariable("id") Long id) {
+	public Optional<Utente> getUtenteById(@PathVariable("id") Long id) {
 		
-		return utenteRepository.getOne(id);
+		return utenteRepository.findById(id);
 	}
 	
 	
