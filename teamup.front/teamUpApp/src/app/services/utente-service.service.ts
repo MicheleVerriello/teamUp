@@ -21,7 +21,16 @@ export class UtenteServiceService {
   }
 
   getUtenteById(id: Number): Observable<Utente> {
-
     return this.http.get<Utente>(this.url + "/utente/" + id);
+  }
+
+  modificaUtente(utente: Utente): Observable<Utente> {
+
+    return this.http.post<Utente>(this.url + "/modifica", utente);
+  }
+
+  modificaPassword(utente: Utente): Observable<Utente> {
+
+    return this.http.post<Utente>(this.url + "/modifica/password", utente);
   }
 }

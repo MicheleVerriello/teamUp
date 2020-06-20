@@ -23,8 +23,8 @@
     <ion-card>
       <ion-item class="input-item" lines="none">
         <ion-label>Categoria</ion-label> 
-        <ion-select value="Scegli categoria" okText="Seziona" cancelText="Annulla">
-          <ion-select-option *ngFor="let categoria of categorie" value="categoria.id">{{categoria.nomeCategoria}}</ion-select-option>
+        <ion-select interface="popover" okText="Seziona" cancelText="Annulla">
+          <ion-select-option *ngFor="let categoria of categorie" value="categoria.id" (click)="setCategoria(categoria.id)">{{categoria.nomeCategoria}}</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-card>

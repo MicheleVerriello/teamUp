@@ -124,14 +124,41 @@ public class UtenteRestController {
 	@PostMapping("/modifica")
 	public Utente modificaUtente(@RequestBody Utente utente) {
 		
+		Utente resUtente = new Utente();
+		
 		try {
-			utenteRepository.saveAndFlush(utente);
+			List<Utente> usernames = utenteRepository.findByUsername(utente.getUsername());
+			
+			if(usernames.size() > 0) {
+				resUtente.setId((long) -2);
+			}
+			else {
+				resUtente = utenteRepository.save(utente);
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			utente.setId((long) 0); 
+			resUtente.setId((long) 0); 
 		}
 		
-		return utente;
+		return resUtente;
+	}
+	
+	
+	@Transactional
+	@PostMapping("/modifica/password")
+	public Utente modificaPassword(@RequestBody Utente utente) {
+		
+		Utente resUtente = new Utente();
+		
+		try {
+			resUtente = utenteRepository.saveAndFlush(utente);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			resUtente.setId((long) 0); 
+		}
+		
+		return resUtente;
 	}
 }

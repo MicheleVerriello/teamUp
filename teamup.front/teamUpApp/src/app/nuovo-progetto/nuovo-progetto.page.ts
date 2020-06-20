@@ -68,4 +68,9 @@ export class NuovoProgettoPage implements OnInit {
 
     return true;
   }
+
+  setCategoria(idCategoria: number) {
+    this.progetto.fkIdCategoria = idCategoria;
+  }
+
 }

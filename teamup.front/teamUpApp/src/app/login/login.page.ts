@@ -30,7 +30,7 @@ export class LoginPage implements OnInit {
         if(this.password === res.password) {
           this.errorLogin = false;
           AppComponent.idUtenteLoggato = res.id;
-          this.router.navigateByUrl("/tabs/tab5");
+          this.router.navigateByUrl("/tabs/tab3");
         }
         else{
           this.errorLogin = true;
