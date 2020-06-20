@@ -29,15 +29,32 @@ public class ProgettoRestController {
 	
 	@Transactional
 	@PostMapping("/crea")
-	public void creaProgetto(@RequestBody NuovoProgetto nuovoProgetto) {
-		Progetto resProgetto = progettoRepository.save(nuovoProgetto.getProgetto());
+	public Long creaProgetto(@RequestBody NuovoProgetto nuovoProgetto) {
 		
-		UtenteProgetto utenteProgetto = new UtenteProgetto();
-		utenteProgetto.setFkIdProgetto(resProgetto.getId());
-		utenteProgetto.setFkIdUtente(nuovoProgetto.getIdUtente());
-		utenteProgetto.setTipoUtente(0); //0 = leader
+		Long idProgetto = (long) 0;
 		
-		utenteProgettoRepository.save(utenteProgetto);
+		try {
+			Progetto resProgetto = progettoRepository.save(nuovoProgetto.getProgetto());
+			
+			if(resProgetto.getId() > 0) {
+			
+				UtenteProgetto utenteProgetto = new UtenteProgetto();
+				utenteProgetto.setFkIdProgetto(resProgetto.getId());
+				utenteProgetto.setFkIdUtente(nuovoProgetto.getIdUtente());
+				utenteProgetto.setTipoUtente(0); //0 = leader
+				
+				UtenteProgetto resUtenteProgetto = utenteProgettoRepository.save(utenteProgetto);
+				
+				if(resUtenteProgetto.getId() > 0) {
+					idProgetto = resProgetto.getId();
+				}
+			}
+			
+		}catch(Exception e) {
+			idProgetto = (long) 0;
+		}
+		
+		return idProgetto;
 	}
 	
 	@Transactional
@@ -47,7 +64,7 @@ public class ProgettoRestController {
 	}
 	
 	@Transactional
-	@GetMapping("get/{id}")
+	@GetMapping("/progetto/{id}")
 	public Progetto getProgettoById(@PathVariable("id") Long id) {
 		return progettoRepository.getOne(id);
 	}

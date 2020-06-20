@@ -30,13 +30,19 @@ export class RegistrazionePage implements OnInit {
   }
 
   registrazione() {
+    
+    this.emailEsistente = false;
+    this.usernameEsistente = false;
+    this.erroreGenerico = false;
+    this.emailEUsernameEsistenti = false;
+
     this.utenteService.registrazione(this.nuovoUtente).subscribe(res => {
       if(res && res.id > 0) {
         this.utenteService.login(res.email, res.password).subscribe(resLogin => {
 
           if(resLogin && resLogin.id > 0) {
               AppComponent.idUtenteLoggato = resLogin.id;
-              this.router.navigateByUrl("/tabs/tab5/" + resLogin.id);
+              this.router.navigateByUrl("/tabs/tab5");
           }
           else{
             this.erroreGenerico = true;

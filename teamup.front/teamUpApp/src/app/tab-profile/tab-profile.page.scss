@@ -1,5 +1,6 @@
 .field {
     text-align: right;
+    color: white;
 }
 
 section {
@@ -7,9 +8,24 @@ section {
 }
 
 .card {
-    box-shadow:none !important
+    box-shadow:none !important;
+    --background: rgb(22, 22, 24);
 }
 
 .activated {
     background-color: blue;
- }
+}
+
+.input-item {
+    --background: rgb(22, 22, 24);
+    color: white;
+}
+
+.input-item-edit {
+    --background: rgb(75, 75, 75);
+    color: white;
+}
+
+.list {
+    background-color: rgb(22, 22, 24);
+}

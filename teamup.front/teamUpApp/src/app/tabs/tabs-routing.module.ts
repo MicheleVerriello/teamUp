@@ -24,7 +24,7 @@ const routes: Routes = [
         loadChildren: () => import('../nuovo-progetto/nuovo-progetto.module').then(m => m.NuovoProgettoPageModule)
       },
       {
-        path: 'tab5/:id',
+        path: 'tab5',
         loadChildren: () => import('../tab-profile/tab-profile.module').then(m => m.TabProfilePageModule)
       },
       {
