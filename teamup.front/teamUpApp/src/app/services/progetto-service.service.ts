@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { NuovoProgetto } from '../models/NuovoProgetto';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Progetto } from '../models/Progetto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,8 @@ export class ProgettoServiceService {
 
   constructor(private http: HttpClient) { }
 
-  creaProgetto(nuovoProgetto: NuovoProgetto): Observable<Number> {
+  creaProgetto(progetto: Progetto): Observable<Number> {
 
-    return this.http.post<Number>(this.url + "/crea", nuovoProgetto);
+    return this.http.post<Number>(this.url + "/crea", progetto);
   } 
 }

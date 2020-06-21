@@ -11,7 +11,7 @@ public class UtenteProgetto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private int tipoUtente;
+	private int tipoUtente; //0 = leader, 1 = teammate, 2 = request
 	private Long fkIdUtente;
 	private Long fkIdProgetto;
 	
