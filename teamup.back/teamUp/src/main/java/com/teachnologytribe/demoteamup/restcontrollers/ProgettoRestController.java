@@ -1,5 +1,7 @@
 package com.teachnologytribe.demoteamup.restcontrollers;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +49,8 @@ public class ProgettoRestController {
 	
 	@Transactional
 	@GetMapping("/progetto/{id}")
-	public Progetto getProgettoById(@PathVariable("id") Long id) {
-		return progettoRepository.getOne(id);
+	public Optional<Progetto> getProgettoById(@PathVariable("id") Long id) {
+		return progettoRepository.findById(id);
 	}
 	
 	

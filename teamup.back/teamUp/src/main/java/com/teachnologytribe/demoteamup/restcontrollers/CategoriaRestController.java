@@ -52,7 +52,13 @@ public class CategoriaRestController {
 		Long idCategoria;
 		
 		try {
-			idCategoria = categoriaRepository.save(nuovaCategoria).getId();
+			
+			if(this.getIdCategoriaByName(nuovaCategoria.getNomeCategoria()) > 0) {
+				idCategoria = (long) -1;
+			}
+			else {
+				idCategoria = categoriaRepository.save(nuovaCategoria).getId();
+			}
 		}
 		catch(Exception e) {
 			idCategoria = (long) 0;

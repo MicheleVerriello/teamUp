@@ -14,23 +14,30 @@ import { UtenteProgetto } from '../models/UtenteProgetto';
   templateUrl: './nuovo-progetto.page.html',
   styleUrls: ['./nuovo-progetto.page.scss'],
 })
-export class NuovoProgettoPage implements OnInit {
+export class NuovoProgettoPage {
 
   progetto: Progetto;
   categorie: Categoria[] = [];
   erroreCreazioneProgetto: boolean = false;
   erroreInserimentoCategoria: boolean = false;
+  categoriaGiaEsistente: boolean = false;
+  categoria: Categoria;
+  editCategoriaAperto: boolean = false;
+
 
   constructor(private progettoService: ProgettoServiceService, private categoriaService: CategoriaServiceService, private router: Router, private utenteProgettoService: UtenteProgettoServiceService) {
+    this.categoria = new Categoria();
     this.progetto = new Progetto();
-    this.getCategorie()
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    this.getCategorie();
   }
 
   creaProgetto() {
 
+    this.erroreInserimentoCategoria = false;
+    this.categoriaGiaEsistente = false;
     this.erroreCreazioneProgetto = false;
     this.progettoService.creaProgetto(this.progetto).subscribe(res => {
 
@@ -66,8 +73,25 @@ export class NuovoProgettoPage implements OnInit {
 
   }
 
-  nuovaCategoria() {
+  creaCategoria() {
+    
+    this.erroreInserimentoCategoria = false;
+    this.categoriaGiaEsistente = false;
+    this.erroreCreazioneProgetto = false;
+    
+    this.categoriaService.creaCategoria(this.categoria).subscribe(res => {
 
+      if(res > 0) {
+        this.getCategorie();
+        this.editCategoriaAperto = false;
+      }
+      else if(res === -1) {
+        this.categoriaGiaEsistente = true;
+      }
+      else{
+        this.erroreInserimentoCategoria = true;
+      }
+    });
   }
 
   creaProgettoAttivo(): boolean {
@@ -89,6 +113,7 @@ export class NuovoProgettoPage implements OnInit {
     this.erroreInserimentoCategoria = false;
     
     this.categoriaService.getCategoriaByNomeCategoria(event.detail.value).subscribe(res => {
+      
       if(res > 0) {
         this.progetto.fkIdCategoria = res;
       }
@@ -98,5 +123,13 @@ export class NuovoProgettoPage implements OnInit {
     });
 
     console.log("this.progetto = ", this.progetto);
+  }
+
+  showEditCategoria() {
+    this.editCategoriaAperto = true;
+  }
+
+  notShowEditCategoria() {
+    this.editCategoriaAperto = false;
   }
 }

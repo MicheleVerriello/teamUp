@@ -31,4 +31,16 @@ ion-content {
         margin-left: 2%;
         margin-right: 2%;
     }
+
+    ion-row{
+        background-color: rgb(75, 75, 75);
+    }
+
+    ion-col{
+        background-color: rgb(75, 75, 75);
+    }
+
+    .icon-small{
+        --ionicon-stroke-width: 16px;
+    }
 }

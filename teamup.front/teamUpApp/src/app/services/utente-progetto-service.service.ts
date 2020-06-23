@@ -15,5 +15,9 @@ export class UtenteProgettoServiceService {
   partecipaProgetto(utenteProgetto: UtenteProgetto): Observable<Number> {
 
     return this.http.post<Number>(this.url + "/partecipa", utenteProgetto);
-  } 
+  }
+  
+  getProgettiByIdUtente(id: Number): Observable<Number[]> {
+    return this.http.get<Number[]>(this.url + "/progetti/" + id);
+  }
 }

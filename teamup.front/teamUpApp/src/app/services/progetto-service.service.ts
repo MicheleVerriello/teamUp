@@ -15,5 +15,9 @@ export class ProgettoServiceService {
   creaProgetto(progetto: Progetto): Observable<Number> {
 
     return this.http.post<Number>(this.url + "/crea", progetto);
-  } 
+  }
+
+  getProgettoById(id: Number): Observable<Progetto> {
+    return this.http.get<Progetto>(this.url + "/progetto/" + id);
+  }
 }
