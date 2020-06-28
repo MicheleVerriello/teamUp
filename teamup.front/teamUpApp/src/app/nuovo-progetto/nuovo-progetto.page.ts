@@ -98,14 +98,14 @@ export class NuovoProgettoPage {
 
     let pulsanteCreaProgettoAttivo: boolean;
 
-    if((this.progetto.nomeProgetto && this.progetto.nomeProgetto.length > 0) && (this.progetto.descrizione && this.progetto.descrizione.length > 0) /*&& ( Controlli sulla categoria )*/){
+    if((this.progetto.nomeProgetto && this.progetto.nomeProgetto.length > 0) && (this.progetto.descrizione && this.progetto.descrizione.length > 0) && (this.progetto.fkIdCategoria && this.progetto.fkIdCategoria > 0)){
       pulsanteCreaProgettoAttivo = true;
     }
     else{
       pulsanteCreaProgettoAttivo = false;
     }
 
-    return true;
+    return pulsanteCreaProgettoAttivo;
   }
 
   setCategoria(event) {

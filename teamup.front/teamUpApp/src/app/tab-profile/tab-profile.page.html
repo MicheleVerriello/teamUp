@@ -126,6 +126,12 @@
       <ion-icon slot="end" name="pencil"></ion-icon>
     </ion-button>
   </ion-card>
+  <ion-card class="card" *ngIf="!isEdit  && !cambiaPasswordView">
+    <ion-button expand="block" (click)="showAlertEliminaProfilo()" color="danger">
+      Elimina profilo
+    <ion-icon slot="end" name="trash"></ion-icon>
+    </ion-button>
+  </ion-card>
 
   <ion-card class="card" *ngIf="isEdit">
     <section>

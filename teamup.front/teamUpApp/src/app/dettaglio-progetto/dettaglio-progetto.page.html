@@ -1,0 +1,72 @@
+<ion-header class="header">
+  <ion-toolbar class="toolbar">
+
+    <ion-buttons slot="start">
+      <ion-button (click)="indietro()">
+        <ion-icon slot="icon-only" name="arrow-back-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="title">
+      Indietro
+    </ion-title>
+    <ion-buttons slot="end" *ngIf="relazioneUtenteLoggatoProgetto === 1 || relazioneUtenteLoggatoProgetto === 0">
+      <ion-button (click)="mostraPopover()">
+        <ion-icon slot="icon-only" name="ellipsis-vertical" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content">
+
+  <ion-card class="main-card">
+    <img src="assets/project.jpg"/>
+    <ion-card-header>
+      <ion-card-subtitle>{{categoria.nomeCategoria}}</ion-card-subtitle>
+      <ion-card-title><b>{{progetto.nomeProgetto}}</b></ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{progetto.descrizione}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="relazioneUtenteLoggatoProgetto === 3" class="button-card">
+    <ion-button color="success" expand="block" (click)="partecipaProgetto()">Invia Richiesta</ion-button>
+  </ion-card>
+
+  <ion-card *ngIf="relazioneUtenteLoggatoProgetto === 2" class="button-card">
+    <ion-button color="success" expand="block" disabled>Richiesta inviata</ion-button>
+  </ion-card>
+
+  <ion-list *ngIf="relazioneUtenteLoggatoProgetto === 0 || relazioneUtenteLoggatoProgetto === 1">
+    <ion-card *ngFor="let dettaglioUtenteProgetto of this.dettaglioUtentiProgetto" [ngStyle]="{'background-color': dettaglioUtenteProgetto.tipoUtente === 1 ? '#161618' : '#feb236' }" class="item-list">
+      <ion-row>
+        <ion-col  size="9">  
+          <ion-row style="color: white;">
+            <ion-col>
+              {{dettaglioUtenteProgetto.utente.nome}}
+            </ion-col>
+            <ion-col>
+              {{dettaglioUtenteProgetto.utente.cognome}}
+            </ion-col>
+          </ion-row>
+          <ion-row style="color: grey;">
+            <ion-col>
+              {{dettaglioUtenteProgetto.utente.username}}
+            </ion-col>
+            <ion-col>
+              {{dettaglioUtenteProgetto.utente.email}}
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="3" *ngIf="dettaglioUtenteProgetto.tipoUtente == 1">
+          <span style="color: red" (click)="espelliTeammate(dettaglioUtenteProgetto.utente.id)"><b>Espelli</b></span>
+        </ion-col>
+        <ion-col size="3" *ngIf="dettaglioUtenteProgetto.tipoUtente == 0">
+          <span style="color: black"><b>Leader</b></span>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-list>
+
+</ion-content>

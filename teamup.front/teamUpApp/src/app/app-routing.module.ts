@@ -25,7 +25,30 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'dettaglio-progetto/:id',
+    loadChildren: () => import('./dettaglio-progetto/dettaglio-progetto.module').then( m => m.DettaglioProgettoPageModule)
+  },
+  {
+    path: 'richiest-partecipazione-progetto/:id',
+    loadChildren: () => import('./richiest-partecipazione-progetto/richiest-partecipazione-progetto.module').then( m => m.RichiestPartecipazioneProgettoPageModule)
+  },
+  {
+    path: 'popover-progetto/:id',
+    loadChildren: () => import('./popover-progetto/popover-progetto.module').then( m => m.PopoverProgettoPageModule)
+  },
+  {
+    path: 'modifica-progetto/:id',
+    loadChildren: () => import('./modifica-progetto/modifica-progetto.module').then( m => m.ModificaProgettoPageModule)
+  },  {
+    path: 'paypal',
+    loadChildren: () => import('./pages/paypal/paypal.module').then( m => m.PaypalPageModule)
   }
+
+
+
+
 ];
 @NgModule({
   imports: [

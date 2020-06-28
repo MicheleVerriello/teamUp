@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Utente } from '../models/Utente';
 import { UtenteServiceService } from '../services/utente-service.service';
 import { AppComponent } from '../app.component';
+import { AlertController } from '@ionic/angular';
+import { UtenteProgettoServiceService } from '../services/utente-progetto-service.service';
+import { ProgettoServiceService } from '../services/progetto-service.service';
 
 @Component({
   selector: 'app-tab-profile',
@@ -24,8 +27,9 @@ export class TabProfilePage implements OnInit {
   erroreGenericoCambioPassword: boolean = false;
   vecchiaPasswordDiversa: boolean = false;
   nuovaPasswordNonCombacia: boolean = false;
+  erroreEliminaUtente: boolean = false;
 
-  constructor(private utenteService: UtenteServiceService) {
+  constructor(private utenteService: UtenteServiceService, private alertController: AlertController, private router: Router, private utenteProgettoService: UtenteProgettoServiceService, private progettoService: ProgettoServiceService) {
     this.utente = new Utente();
     this.utenteModificato = new Utente();
     this.utenteModificaPassword = new Utente();
@@ -86,7 +90,11 @@ export class TabProfilePage implements OnInit {
 
     this.erroreGenerico = false;
     this.modificaUsernameGiaEsistente = false;
-
+    this.erroreEliminaUtente = false;
+    this.erroreGenericoCambioPassword = false;
+    this.vecchiaPasswordDiversa = false;
+    this.nuovaPasswordNonCombacia = false;
+    
     this.utenteService.modificaUtente(this.utenteModificato).subscribe(res => {
       if(res.id > 0) {
         console.log(res)
@@ -114,6 +122,9 @@ export class TabProfilePage implements OnInit {
     this.erroreGenericoCambioPassword = false;
     this.vecchiaPasswordDiversa = false;
     this.nuovaPasswordNonCombacia = false;
+    this.erroreEliminaUtente = false;
+    this.erroreGenerico = false;
+    this.modificaUsernameGiaEsistente = false;
 
     this.utenteService.getUtenteById(AppComponent.idUtenteLoggato).subscribe(res => {
       if(this.vecchiaPassword === res.password){
@@ -152,5 +163,68 @@ export class TabProfilePage implements OnInit {
     this.vecchiaPasswordDiversa = false;
     this.nuovaPasswordNonCombacia = false;
     this.cambiaPasswordView = false;
+  }
+
+  async showAlertEliminaProfilo() {
+    const alert = await this.alertController.create({
+      cssClass: '',
+      header: 'Elimina profilo',
+      subHeader: '',
+      message: 'Ciao ' + this.utente.nome + ", sei sicuro di voler eliminare il tuo profilo?",
+      buttons: [
+        {
+          text: 'Annulla',
+          role: 'cancel',
+          cssClass: '',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            this.eliminaUtente();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  eliminaUtente() {
+
+    this.erroreEliminaUtente = false;
+    let erroreEliminazioneProgetti: boolean = false;
+
+    this.utenteProgettoService.getProgettiByIdUtente(AppComponent.idUtenteLoggato).subscribe(resGetProgettiByIdUtente => { 
+
+      console.log("resGetProgettiByIdUtente, ", resGetProgettiByIdUtente)
+
+      for(let utenteProgetto of resGetProgettiByIdUtente) {
+        if(utenteProgetto.tipoUtente === 0){
+          this.progettoService.eliminaProgettoById(utenteProgetto.fkIdProgetto).subscribe(resEliminaProgettoById => {
+
+            console.log("resEliminaProgettoById, ", resEliminaProgettoById)
+            if(resEliminaProgettoById === 0) {
+              this.erroreEliminaUtente = true;
+              erroreEliminazioneProgetti = true;
+            }
+          });
+        }
+      }
+    });
+
+    if(!erroreEliminazioneProgetti) {    
+      this.utenteService.eliminaUtente(AppComponent.idUtenteLoggato).subscribe(resEliminaUtente => {
+
+        console.log("resEliminaUtente, ", resEliminaUtente)
+        if(resEliminaUtente === 0) {
+          this.erroreEliminaUtente = true;
+        }
+        else {
+          this.router.navigateByUrl("/login")
+        }
+      });
+    }
   }
 }

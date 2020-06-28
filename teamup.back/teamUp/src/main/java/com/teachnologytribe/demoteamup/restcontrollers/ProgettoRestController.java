@@ -1,5 +1,6 @@
 package com.teachnologytribe.demoteamup.restcontrollers;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -43,8 +44,18 @@ public class ProgettoRestController {
 	
 	@Transactional
 	@PostMapping("/modifica")
-	public void modificaProgetto(@RequestBody Progetto progetto) {
-		progettoRepository.save(progetto);
+	public Long modificaProgetto(@RequestBody Progetto progetto) {
+		
+		Long resId = (long) 0;
+		
+		try {
+			resId =progettoRepository.save(progetto).getId();
+		}
+		catch (Exception e) {
+			resId = (long) 0;
+		}
+		
+		return resId;
 	}
 	
 	@Transactional
@@ -53,11 +64,27 @@ public class ProgettoRestController {
 		return progettoRepository.findById(id);
 	}
 	
+	@Transactional
+	@GetMapping("/ricerca/{valore}")
+	public List<Progetto> ricercaProgetti(@PathVariable("valore") String valore) {
+		return progettoRepository.findProgettoByNomeProgetto(valore);
+	}
 	
 	
 	@Transactional
 	@DeleteMapping("/elimina/{id}")
-	public void eliminaProgetto(@PathVariable("id") Long id) {
-		progettoRepository.deleteById(id);
+	public int eliminaProgetto(@PathVariable("id") Long id) {
+		
+		int resEliminazione = 0;
+		
+		try{
+			progettoRepository.deleteById(id);
+			resEliminazione = 1;
+		}
+		catch (Exception e) {
+			resEliminazione = 0;
+		}
+		
+		return resEliminazione;
 	}
 }

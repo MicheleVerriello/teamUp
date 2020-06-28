@@ -33,4 +33,13 @@ export class UtenteServiceService {
 
     return this.http.post<Utente>(this.url + "/modifica/password", utente);
   }
+
+  eliminaUtente(id: Number): Observable<Number> {
+
+    return this.http.delete<Number>(this.url + "/elimina/" + id);
+  }
+
+  ricercaUtente(valore: String): Observable<Utente[]> {
+    return this.http.get<Utente[]>(this.url + "/ricerca/" + valore)
+  }
 }

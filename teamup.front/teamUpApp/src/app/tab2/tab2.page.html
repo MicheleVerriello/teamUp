@@ -8,9 +8,13 @@
 
 <ion-content class="content">
   
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-list class="list">
     <ion-card *ngFor="let progetto of progetti">
-      <ion-item>{{progetto.nomeProgetto}}<ion-icon slot="end" name="glasses-outline" color="primary"></ion-icon></ion-item> 
+      <ion-item>{{progetto.nomeProgetto}}<ion-icon slot="end" name="glasses-outline" color="primary" [routerLink]="['/dettaglio-progetto', progetto.id]"></ion-icon></ion-item> 
     </ion-card>
   </ion-list>
 </ion-content>

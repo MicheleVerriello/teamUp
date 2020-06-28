@@ -23,16 +23,23 @@ export class Tab2Page {
 
       console.log(res);
 
-      for(let idProgetto of res) {
-        this.progettoService.getProgettoById(idProgetto).subscribe(resProgetto => {
+      for(let progetto of res) {
+        this.progettoService.getProgettoById(progetto.fkIdProgetto).subscribe(resProgetto => {
           this.progetti.push(resProgetto);
         })
       }
     });
   }
 
+  doRefresh(event) {
+      setTimeout(() => {
+      this.getProgettiByIdUtente();
+      event.target.complete();
+    }, 2000);
+  }
 
-  ionViewWillEnter(){
+
+  ionViewDidEnter(){
     this.getProgettiByIdUtente();
   }
 }

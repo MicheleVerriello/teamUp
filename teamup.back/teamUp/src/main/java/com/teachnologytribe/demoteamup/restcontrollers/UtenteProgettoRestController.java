@@ -44,27 +44,80 @@ public class UtenteProgettoRestController {
 	}
 	
 	@Transactional
-	@DeleteMapping("/abbandona")
-	public void abbandonaProgetto(@RequestBody UtenteProgetto utenteProgetto) {
-		utenteProgettoRepository.deleteById(utenteProgettoRepository.findByFkIdUtenteFkIdProgetto(utenteProgetto.getFkIdUtente(), utenteProgetto.getFkIdProgetto()).getId());
+	@DeleteMapping("/abbandona/{idUtente}/{idProgetto}")
+	public void abbandonaProgetto(@PathVariable("idUtente") Long idUtente, @PathVariable("idProgetto") Long idProgetto) {
+		utenteProgettoRepository.deleteById(utenteProgettoRepository.findByFkIdUtenteFkIdProgetto(idUtente, idProgetto).getId());
 	}
 	
-	
-	@GetMapping("/progetti/{id}")
-	public List<Long> getIdProgettiByIdUtente(@PathVariable("id") Long id) {
-		
-		List<Long> idProgetti = new ArrayList<Long>();
+	@Transactional
+	@DeleteMapping("/elimina/{idProgetto}")
+	public int eliminaProgetto(@PathVariable("idProgetto") Long idProgetto) {
+
+		int resEliminazione;
+		List<UtenteProgetto> utentiProgetto = new ArrayList<UtenteProgetto>();
 		
 		try {
-			List<UtenteProgetto> resUtenteProgetto = utenteProgettoRepository.findByFkIdUtente(id);
-			for (UtenteProgetto utenteProgetto : resUtenteProgetto) {
-				idProgetti.add(utenteProgetto.getFkIdProgetto());
+			utentiProgetto = utenteProgettoRepository.findByFkIdProgetto(idProgetto);
+			
+			for (UtenteProgetto utenteProgetto : utentiProgetto) {
+				utenteProgettoRepository.deleteById(utenteProgetto.getId());
 			}
+			
+			resEliminazione = 1;
+		}
+		catch (Exception e) {
+			resEliminazione = 0;
+		}
+		
+		return resEliminazione;
+	}
+	
+	@GetMapping("/progetti/{id}")
+	public List<UtenteProgetto> getIdProgettiByIdUtente(@PathVariable("id") Long id) {
+		
+		List<UtenteProgetto> resUtenteProgetto = new ArrayList<UtenteProgetto>();
+		
+		try {
+			resUtenteProgetto = utenteProgettoRepository.findByFkIdUtente(id);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		return idProgetti;
+		return resUtenteProgetto;
+	}
+	
+	@GetMapping("/utenti/{id}")
+	public List<UtenteProgetto> getIdUtentiByIdProgetto(@PathVariable("id") Long id) {
+		
+		List<UtenteProgetto> resUtenteProgetto = new ArrayList<UtenteProgetto>();
+		
+		try {
+			resUtenteProgetto = utenteProgettoRepository.findByFkIdProgetto(id);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return resUtenteProgetto;
+	}
+	
+	@PostMapping("/progetto/accetta")
+	public Long accettaPartecipante(UtenteProgetto utenteProgetto) {
+		
+		Long res = (long) 0;
+		
+		try {
+			UtenteProgetto resUtenteProgetto = utenteProgettoRepository.findByFkIdUtenteFkIdProgetto(utenteProgetto.getFkIdUtente(), utenteProgetto.getFkIdProgetto());
+			
+			utenteProgetto.setId(resUtenteProgetto.getId());
+			
+			res = utenteProgettoRepository.saveAndFlush(utenteProgetto).getId();
+		}
+		catch(Exception e) {
+			res = (long) 0;
+		}
+		
+		return res;
 	}
 }

@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -119,6 +120,13 @@ public class UtenteRestController {
 		return utenteRepository.findById(id);
 	}
 	
+	@Transactional
+	@GetMapping("/ricerca/{valore}")
+	public List<Utente> ricercaUtente(@PathVariable("valore") String valore) {
+		
+		return utenteRepository.findByLikeNomeOrCognomeOrUsernameOrEmail(valore, valore, valore, valore);
+	}
+	
 	
 	@Transactional
 	@PostMapping("/modifica")
@@ -160,5 +168,23 @@ public class UtenteRestController {
 		}
 		
 		return resUtente;
+	}
+	
+	
+	@Transactional
+	@DeleteMapping("/elimina/{id}")
+	public Long eliminaUtente(@PathVariable("id") Long id) {
+		
+		Long resId = (long) 0;
+		
+		try {
+			utenteRepository.deleteById(id);
+			resId = (long) 1;
+		}
+		catch (Exception e) {
+			resId = (long) 0;
+		}
+		
+		return resId;
 	}
 }

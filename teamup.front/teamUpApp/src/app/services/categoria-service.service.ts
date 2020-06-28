@@ -13,12 +13,15 @@ export class CategoriaServiceService {
   constructor(private http: HttpClient) { }
 
   getCategorie(): Observable<Categoria[]> {
-
     return this.http.get<Categoria[]>(this.url + "/categorie");
   }
 
   getCategoriaByNomeCategoria(nomeCategoria: String): Observable<Number> {
     return this.http.get<Number>(this.url + "/categoria/" + nomeCategoria);
+  }
+
+  getCategoriaById(id: Number): Observable<Categoria> {
+    return this.http.get<Categoria>(this.url + "/categoria/id/" + id);
   }
 
   creaCategoria(categoria: Categoria): Observable<Number> {

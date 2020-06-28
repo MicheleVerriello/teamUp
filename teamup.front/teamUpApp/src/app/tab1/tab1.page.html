@@ -7,5 +7,46 @@
 </ion-header>
 
 <ion-content class="content">
-  
+  <ion-card class="card">
+    <ion-searchbar placeholder="Ricerca" showCancelButton="focus" inputmode="search" (input)="ricerca($event.target.value)"></ion-searchbar>
+  </ion-card>
+  <ion-card class="card-tipologia">
+    <ion-item class="item-tipologia">
+      <ion-label class="label-tipologia">Tipologia di Ricerca</ion-label>
+      <ion-select interface="alert" (ionChange)="setTipoRicerca($event)" value="utente" okText="Seleziona" cancelText="Annulla">
+        <ion-select-option value="utente">Utente</ion-select-option>
+        <ion-select-option value="progetto">Progetto</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+
+  <ion-list *ngIf="!ricercaPerUtente">
+    <ion-card *ngFor="let progetto of progetti" class="item-list">
+      <ion-item class="item-list">
+        {{progetto.nomeProgetto}}
+        <ion-icon slot="end" name="glasses-outline" color="light" [routerLink]="['/dettaglio-progetto', progetto.id]"></ion-icon> 
+      </ion-item>
+    </ion-card>
+  </ion-list>
+
+  <ion-list *ngIf="ricercaPerUtente">
+    <ion-card *ngFor="let utente of utenti" class="item-list">
+        <ion-row style="color: white;">
+          <ion-col>
+            {{utente.nome}}
+          </ion-col>
+          <ion-col>
+            {{utente.cognome}}
+          </ion-col>
+        </ion-row>
+        <ion-row style="color: grey;">
+          <ion-col>
+            {{utente.username}}
+          </ion-col>
+          <ion-col>
+            {{utente.email}}
+          </ion-col>
+        </ion-row>
+    </ion-card>
+  </ion-list>
 </ion-content>

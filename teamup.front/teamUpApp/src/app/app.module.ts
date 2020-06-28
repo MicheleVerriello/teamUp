@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UtenteServiceService } from './services/utente-service.service';
 import { ProgettoServiceService } from './services/progetto-service.service';
+import { PayPal } from '@ionic-native/paypal/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,8 @@ import { ProgettoServiceService } from './services/progetto-service.service';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     UtenteServiceService,
-    ProgettoServiceService
+    ProgettoServiceService,
+    PayPal
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,7 @@
 {
   "name": "teamUpApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -1,6 +1,7 @@
 package com.teachnologytribe.demoteamup.restcontrollers;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -43,6 +44,13 @@ public class CategoriaRestController {
 		}
 		
 		return idCategoria;
+	}
+	
+	@Transactional
+	@GetMapping("/categoria/id/{id}")
+	public Optional<Categoria> getCategoriaById(@PathVariable("id") Long id) {
+		
+		return categoriaRepository.findById(id);
 	}
 	
 	@Transactional

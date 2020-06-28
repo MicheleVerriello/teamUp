@@ -1,0 +1,18 @@
+<ion-header class="header">
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start">
+      <ion-button (click)="indietro()">
+        <ion-icon slot="icon-only" name="arrow-back-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="title">Richieste in sospeso</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content">
+    <ion-list>
+      <ion-card *ngFor="let utente of utenti" class="item-list">
+        <ion-item>{{utente.nome}}&nbsp;{{utente.cognome}} <ion-icon slot="end" name="close-circle-outline" (click)="rifiutaRichiesta(utente.id)" color="danger"></ion-icon> <ion-icon slot="end" name="checkmark-circle-outline" (click)="accettaRichiesta(utente.id)" color="success"></ion-icon></ion-item>
+      </ion-card>
+    </ion-list>
+</ion-content>

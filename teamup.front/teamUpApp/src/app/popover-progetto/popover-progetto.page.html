@@ -1,0 +1,9 @@
+<ion-content>
+  <ion-list>
+    <ion-item *ngIf="tipoUtente === 0" (click)="vaiAPaginaRichieste()">Richieste in sospeso &nbsp; <span style="color: red;"><b>{{contatoreRichieste}}</b></span></ion-item>
+    <ion-item *ngIf="tipoUtente === 0" (click)="SponsorizzaProgetto()">Sponsorizza progetto</ion-item>
+    <ion-item *ngIf="tipoUtente === 0" (click)="modificaProgetto()">Modifica progetto</ion-item>
+    <ion-item class="item-delete" *ngIf="tipoUtente === 0" (click)="eliminaProgetto()">Elimina progetto</ion-item>
+    <ion-item class="item-delete" *ngIf="tipoUtente === 1" (click)="abbandonaProgetto()">Abbandona progetto</ion-item>
+  </ion-list>
+</ion-content>
