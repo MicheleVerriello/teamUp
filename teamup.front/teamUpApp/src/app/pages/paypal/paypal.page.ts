@@ -9,8 +9,8 @@ import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal
 export class PaypalPage implements OnInit {
 
   paymentAmount: string = '2.00';
-  currency: string = 'USD';
-  currencyIcon: string = '$';
+  currency: string = 'EUR';
+  currencyIcon: string = '€';
   PRODUCTION_CLIENT_ID: string = "";
   SANDBOX_CLIENT_ID: string = "AdngUFtevbfzbTdKM79HqrR7XGD3k-6R6_fUpPTx3uOp9fA8ilaQ1_zFmhJdqqlzpb9nfj9Hh_-a_D4B";
 
@@ -61,7 +61,5 @@ export class PaypalPage implements OnInit {
     }, () => {
       // Error in initialization, maybe PayPal isn't supported or something else
     });
-  }
-}
   }
 }
