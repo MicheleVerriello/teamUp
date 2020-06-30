@@ -21,7 +21,7 @@ export class CategoriaServiceService {
   }
 
   getCategoriaById(id: Number): Observable<Categoria> {
-    return this.http.get<Categoria>(this.url + "/categoria/" + id);
+    return this.http.get<Categoria>(this.url + "/categoria/id/" + id);
   }
 
   creaCategoria(categoria: Categoria): Observable<Number> {

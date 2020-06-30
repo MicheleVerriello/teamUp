@@ -3,6 +3,7 @@ import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal
 import { ProgettoServiceService } from 'src/app/services/progetto-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Progetto } from 'src/app/models/Progetto';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-paypal',
@@ -17,9 +18,9 @@ export class PaypalPage implements OnInit {
   currency: string = 'EUR';
   currencyIcon: string = '€';
   PRODUCTION_CLIENT_ID: string = "";
-  SANDBOX_CLIENT_ID: string = "AdngUFtevbfzbTdKM79HqrR7XGD3k-6R6_fUpPTx3uOp9fA8ilaQ1_zFmhJdqqlzpb9nfj9Hh_-a_D4B";
+  SANDBOX_CLIENT_ID: string = "non immissibile per privacy";
 
-  constructor(private payPalService: PayPal, private progettoService: ProgettoServiceService, private router: Router, private route: ActivatedRoute) {
+  constructor(private navCtrl: NavController, private payPalService: PayPal, private progettoService: ProgettoServiceService, private router: Router, private route: ActivatedRoute) {
     this.progetto = new Progetto();
   }
 
@@ -83,5 +84,9 @@ export class PaypalPage implements OnInit {
     }, () => {
       // Error in initialization, maybe PayPal isn't supported or something else
     }); */
+  }
+
+  indietro() {
+    this.navCtrl.back();
   }
 }

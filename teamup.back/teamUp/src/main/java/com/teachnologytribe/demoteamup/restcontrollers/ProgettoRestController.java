@@ -65,6 +65,12 @@ public class ProgettoRestController {
 	}
 	
 	@Transactional
+	@GetMapping("/progetti")
+	public List<Progetto> getProgetti() {
+		return progettoRepository.findAll();
+	}
+	
+	@Transactional
 	@GetMapping("/ricerca/{valore}")
 	public List<Progetto> ricercaProgetti(@PathVariable("valore") String valore) {
 		return progettoRepository.findProgettoByNomeProgetto(valore);

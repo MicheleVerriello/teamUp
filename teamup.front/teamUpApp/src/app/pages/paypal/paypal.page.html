@@ -1,7 +1,9 @@
 <ion-header class="header">
   <ion-toolbar class="toolbar">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-button (click)="indietro()">
+        <ion-icon slot="icon-only" name="arrow-back-outline" color="light"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title class="title">
       Paga con PayPal
@@ -12,7 +14,7 @@
 <ion-content class="content">
 
   <ion-card>
-    <!--<ion-img src="assets/images.png"></ion-img>-->
+    <ion-img src="assets/images.png"></ion-img>
     <ion-card-header>
       <ion-card-subtitle>Acquisto</ion-card-subtitle>
       <ion-card-title>Dettaglio Pagamento</ion-card-title>

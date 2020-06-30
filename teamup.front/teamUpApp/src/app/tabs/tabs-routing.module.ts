@@ -9,23 +9,23 @@ const routes: Routes = [
     children: [
       {
         path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        loadChildren: () => import('../pages/tab-ricerca/tab1.module').then(m => m.Tab1PageModule)
       },
       {
         path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        loadChildren: () => import('../pages/tab-miei-progetti/tab2.module').then(m => m.Tab2PageModule)
       },
       {
         path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        loadChildren: () => import('../pages/tab-home/tab3.module').then(m => m.Tab3PageModule)
       },
       {
         path: 'tab4',
-        loadChildren: () => import('../nuovo-progetto/nuovo-progetto.module').then(m => m.NuovoProgettoPageModule)
+        loadChildren: () => import('../pages/tab-nuovo-progetto/nuovo-progetto.module').then(m => m.NuovoProgettoPageModule)
       },
       {
         path: 'tab5',
-        loadChildren: () => import('../tab-profile/tab-profile.module').then(m => m.TabProfilePageModule)
+        loadChildren: () => import('../pages/tab-profilo/tab-profile.module').then(m => m.TabProfilePageModule)
       },
       {
         path: '',

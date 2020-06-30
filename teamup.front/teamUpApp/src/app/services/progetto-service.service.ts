@@ -31,4 +31,8 @@ export class ProgettoServiceService {
   eliminaProgettoById(id: Number): Observable<Number> {
     return this.http.delete<Number>(this.url + "/elimina/" + id);
   }
+
+  getAll(): Observable<Progetto[]> {
+    return this.http.get<Progetto[]>(this.url + "/progetti");
+  }
 }

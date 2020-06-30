@@ -1,0 +1,86 @@
+<ion-header class="header">
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start">
+      <ion-button (click)="indietro()">
+        <ion-icon slot="icon-only" name="arrow-back-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="title">Modifica progetto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content">
+
+  <ion-list class="input-list">
+
+    <ion-card>
+      <ion-item class="input-item" lines="none">
+        <ion-input class="input" type="text" placeholder="Inserisci nome del progetto" clearInput="true" [(ngModel)]="progetto.nomeProgetto"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item class="input-item" lines="none">
+        <ion-textarea class="input" type="text" placeholder="Inserisci una descrizione del progetto" clearInput="true" [(ngModel)]="progetto.descrizione"></ion-textarea>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-row>
+        <ion-col size="9">
+          <ion-item class="input-item" lines="none">
+            <ion-label>Categoria</ion-label> 
+            <ion-select interface="alert" placeholder="- - - -" (ionChange)="setCategoria($event)" okText="Seleziona" cancelText="Annulla">
+              <ion-select-option *ngFor="let categoria of categorie">{{categoria.nomeCategoria}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size="3">
+          <ion-item class="input-item" lines="none">
+            <ion-icon *ngIf="!editCategoriaAperto" name="add-circle-outline" color="success" slot="end" (click)="showEditCategoria()"></ion-icon>
+            <ion-icon *ngIf="editCategoriaAperto" name="remove-circle-outline" color="danger" slot="end" (click)="notShowEditCategoria()"></ion-icon>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    <ion-card *ngIf="editCategoriaAperto">
+      <ion-row>
+        <ion-col size="9">
+          <ion-item class="input-item" lines="none">
+            <ion-input class="input" type="text" placeholder="Inserisci nome categoria" clearInput="true" [(ngModel)]="categoria.nomeCategoria"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="3">
+          <ion-item *ngIf="editCategoriaAperto" class="input-item" lines="none">
+            <ion-icon name="add-circle-outline" color="success" slot="end" (click)="creaCategoria()"></ion-icon>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    <!-- ERRORS -->
+
+    <ion-card *ngIf="erroreModificaProgetto">
+      <ion-item class="input-item-error" lines="none">
+        <ion-input class="login-error" value="Errore nella modifica del progetto, riprovare." readonly></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card *ngIf="categoriaGiaEsistente">
+      <ion-item class="input-item-error" lines="none">
+        <ion-input class="login-error" value="Categoria già esistente, riprovare." readonly></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card *ngIf="erroreInserimentoCategoria">
+      <ion-item class="input-item-error" lines="none">
+        <ion-input class="login-error" value="Errore nell' inserimento della categoria, riprovare." readonly></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-button *ngIf="modificaProgettoAttivo()" expand="block" (click)="modificaProgetto()">Modifica progetto</ion-button>
+    <ion-button *ngIf="!modificaProgettoAttivo()" expand="block" disabled>Modifica progetto</ion-button>
+  </ion-list>
+
+</ion-content>
