@@ -3,4 +3,5 @@ export class Progetto {
     nomeProgetto: String;
     descrizione: String;
     fkIdCategoria: Number;
+    sponsorizzato: Number;
 }

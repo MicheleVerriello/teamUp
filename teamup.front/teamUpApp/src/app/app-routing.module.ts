@@ -41,8 +41,9 @@ const routes: Routes = [
   {
     path: 'modifica-progetto/:id',
     loadChildren: () => import('./modifica-progetto/modifica-progetto.module').then( m => m.ModificaProgettoPageModule)
-  },  {
-    path: 'paypal',
+  },
+  {
+    path: 'paypal/:id',
     loadChildren: () => import('./pages/paypal/paypal.module').then( m => m.PaypalPageModule)
   }
 

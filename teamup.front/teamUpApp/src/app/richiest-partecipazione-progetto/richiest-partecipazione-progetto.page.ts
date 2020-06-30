@@ -49,13 +49,13 @@ export class RichiestPartecipazioneProgettoPage implements OnInit {
 
     this.utenteProgettoService.abbandonaProgetto(idUtente, this.idProgetto).subscribe(res => {
       console.log(res);
-    })
 
-    this.utenteProgettoService.partecipaProgetto(utenteProgetto).subscribe(res => {
-      console.log(res);
-      this.utenti = [];
-      this.getRichieste();
-    });
+      this.utenteProgettoService.partecipaProgetto(utenteProgetto).subscribe(resUtenteProgettoService => {
+        console.log(resUtenteProgettoService);
+        this.utenti = [];
+        this.getRichieste();
+      });
+    })
   }
 
   rifiutaRichiesta(idUtente: Number) {

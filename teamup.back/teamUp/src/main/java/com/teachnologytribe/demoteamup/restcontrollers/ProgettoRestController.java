@@ -49,7 +49,7 @@ public class ProgettoRestController {
 		Long resId = (long) 0;
 		
 		try {
-			resId =progettoRepository.save(progetto).getId();
+			resId = progettoRepository.save(progetto).getId();
 		}
 		catch (Exception e) {
 			resId = (long) 0;

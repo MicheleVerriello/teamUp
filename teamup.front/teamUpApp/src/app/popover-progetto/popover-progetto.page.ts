@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ProgettoServiceService } from '../services/progetto-service.service';
 import { UtenteProgettoServiceService } from '../services/utente-progetto-service.service';
 import { NavParams, PopoverController } from '@ionic/angular';
+import { Progetto } from '../models/Progetto';
 
 @Component({
   selector: 'app-popover-progetto',
@@ -15,8 +16,11 @@ export class PopoverProgettoPage implements OnInit {
   tipoUtente: Number;
   idUtente: Number;
   contatoreRichieste: number = 0;
+  progetto: Progetto;
 
-  constructor(private navParams: NavParams, private popoverCtrl: PopoverController, private router: Router, private progettoService: ProgettoServiceService, private utenteProgettoService: UtenteProgettoServiceService) { }
+  constructor(private navParams: NavParams, private popoverCtrl: PopoverController, private router: Router, private progettoService: ProgettoServiceService, private utenteProgettoService: UtenteProgettoServiceService) {
+    this.progetto = new Progetto();
+  }
 
   ngOnInit() {
 
@@ -30,6 +34,10 @@ export class PopoverProgettoPage implements OnInit {
           this.contatoreRichieste = this.contatoreRichieste + 1;
         }
       }
+    });
+
+    this.progettoService.getProgettoById(this.idProgetto).subscribe(res => {
+      this.progetto = res;
     });
   }
 
@@ -59,6 +67,7 @@ export class PopoverProgettoPage implements OnInit {
   }
 
   sponsorizzaProgetto() {
-
+    this.popoverCtrl.dismiss();
+    this.router.navigateByUrl("paypal/" + this.idProgetto);
   }
 }

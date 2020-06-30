@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal/ngx';
+import { ProgettoServiceService } from 'src/app/services/progetto-service.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Progetto } from 'src/app/models/Progetto';
 
 @Component({
   selector: 'app-paypal',
@@ -8,19 +11,38 @@ import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal
 })
 export class PaypalPage implements OnInit {
 
+  idProgetto: Number;
+  progetto: Progetto;
   paymentAmount: string = '2.00';
   currency: string = 'EUR';
   currencyIcon: string = '€';
   PRODUCTION_CLIENT_ID: string = "";
   SANDBOX_CLIENT_ID: string = "AdngUFtevbfzbTdKM79HqrR7XGD3k-6R6_fUpPTx3uOp9fA8ilaQ1_zFmhJdqqlzpb9nfj9Hh_-a_D4B";
 
-  constructor(private payPalService: PayPal) { }
+  constructor(private payPalService: PayPal, private progettoService: ProgettoServiceService, private router: Router, private route: ActivatedRoute) {
+    this.progetto = new Progetto();
+  }
 
   ngOnInit() {
+
+    this.route.params.subscribe(params => {
+      this.idProgetto = +params['id'];
+    });
+
+    this.progettoService.getProgettoById(this.idProgetto).subscribe(res => {
+      this.progetto = res;
+    });
   }
 
   payWithPayPal() {
-    console.log("Pay ????");
+
+    this.progetto.sponsorizzato = 1;
+    this.progettoService.modificaProgetto(this.progetto).subscribe(res => {
+      console.log("res ", res);
+      this.router.navigateByUrl("dettaglio-progetto/" + this.progetto.id);
+    });
+
+    /* console.log("Pay ????");
     this.payPalService.init({
       PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
       PayPalEnvironmentSandbox: this.SANDBOX_CLIENT_ID
@@ -60,6 +82,6 @@ export class PaypalPage implements OnInit {
       });
     }, () => {
       // Error in initialization, maybe PayPal isn't supported or something else
-    });
+    }); */
   }
 }

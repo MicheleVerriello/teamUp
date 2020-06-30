@@ -46,7 +46,7 @@ export class ModificaProgettoPage {
     this.progettoService.modificaProgetto(this.progetto).subscribe(res => {
 
       if(res > 0) {
-        this.router.navigateByUrl("tabs/tab2");
+        this.router.navigateByUrl("dettaglio-progetto/" + this.progetto.id);
       }
       else{
         this.erroreModificaProgetto = true;

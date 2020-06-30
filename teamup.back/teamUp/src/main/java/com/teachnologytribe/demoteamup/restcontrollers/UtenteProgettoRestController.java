@@ -46,6 +46,9 @@ public class UtenteProgettoRestController {
 	@Transactional
 	@DeleteMapping("/abbandona/{idUtente}/{idProgetto}")
 	public void abbandonaProgetto(@PathVariable("idUtente") Long idUtente, @PathVariable("idProgetto") Long idProgetto) {
+		
+		System.out.println("res = " + utenteProgettoRepository.findByFkIdUtenteFkIdProgetto(idUtente, idProgetto).getId());
+		
 		utenteProgettoRepository.deleteById(utenteProgettoRepository.findByFkIdUtenteFkIdProgetto(idUtente, idProgetto).getId());
 	}
 	

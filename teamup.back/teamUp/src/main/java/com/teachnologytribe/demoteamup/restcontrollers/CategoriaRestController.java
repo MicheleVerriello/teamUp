@@ -18,7 +18,7 @@ import com.teachnologytribe.demoteamup.classi.Categoria;
 import com.teachnologytribe.demoteamup.repositories.interfaces.ICategoriaRepository;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8000")
+@CrossOrigin(origins = "http://localhost:8100")
 @RequestMapping("/categoria")
 public class CategoriaRestController {
 	

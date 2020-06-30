@@ -14,6 +14,7 @@ public class Progetto {
 	private String nomeProgetto;
 	private String descrizione;
 	private Long fkIdCategoria;
+	private Long sponsorizzato; //1 = sponsorizzato
 	
 	
 	public Long getId() {
@@ -40,4 +41,10 @@ public class Progetto {
 	public void setFkIdCategoria(Long fkIdCategoria) {
 		this.fkIdCategoria = fkIdCategoria;
 	}	
+	public Long getSponsorizzato() {
+		return sponsorizzato;
+	}
+	public void setSponsorizzato(Long sponsorizzato) {
+		this.sponsorizzato = sponsorizzato;
+	}
 }
